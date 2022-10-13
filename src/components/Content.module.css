@@ -1,0 +1,76 @@
+.container {
+  width: 60%;
+  max-width: 1440px;
+  margin: 32px auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  background-color: #fff7e9;
+  color: #656b6e;
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff731d;
+}
+
+.subtitle {
+  font-size: 22px;
+  font-weight: normal;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: white;
+  padding: 38px 32px 32px 72px;
+  border-radius: 8px;
+  gap: 8px;
+}
+
+.emdash {
+  margin-right: 4px;
+}
+
+.commentFooter {
+  text-align: right;
+}
+
+.comment::before {
+  content: '“';
+  font-size: 96px;
+  position: absolute;
+  top: 0px;
+  left: 20px;
+}
+
+.commentText {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.star {
+  width: 24px;
+  height: 24px;
+}

@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 48px;
+  background-color: #fff7e9;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-weight: bold;
+  color: #ff731d;
+}
+
+.link {
+  cursor: pointer;
+}
