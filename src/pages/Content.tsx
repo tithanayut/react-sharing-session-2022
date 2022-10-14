@@ -1,13 +1,15 @@
 import ReactPlayer from 'react-player';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useAuth } from '../providers/AuthProvider';
 import useContent from '../hooks/useContent';
-import Loading from './Loading';
-import Error from './Error';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 import classes from './Content.module.css';
 
 const Content = () => {
   const { id } = useParams();
   const { loading, error, content } = useContent(id || '');
+  const { isLoggedIn, username } = useAuth();
 
   if (loading || !content) return <Loading />;
   if (error) return <Error />;
@@ -51,7 +53,7 @@ const Content = () => {
               {[...Array(rating).keys()].map((star) => (
                 <img
                   key={star}
-                  className={classes.star}
+                  className={classes.icon}
                   src="/star.svg"
                   alt="Rating Star"
                 />
@@ -62,6 +64,12 @@ const Content = () => {
             </p>
             <p>{createDate.toDateString()}</p>
             {showUpdateDate && <p>(Updated on {updateDate.toDateString()})</p>}
+            {isLoggedIn && postedBy.username === username && (
+              <Link to={`/content/${id}/edit`} className={classes.editLink}>
+                <img className={classes.icon} src="/edit.svg" alt="Edit" />
+                Edit
+              </Link>
+            )}
           </div>
         </div>
       </div>

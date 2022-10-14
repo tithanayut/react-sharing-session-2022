@@ -75,7 +75,16 @@
   line-height: 1.4;
 }
 
-.star {
+.editLink {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 2px;
+  font-weight: bold;
+  color: #ff731d;
+}
+
+.icon {
   width: 24px;
   height: 24px;
 }

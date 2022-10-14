@@ -1,41 +1,50 @@
-import { FormEvent, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import ReactStars from 'react-stars';
 import toast from 'react-hot-toast';
+import { useAuth } from '../providers/AuthProvider';
+import useContent from '../hooks/useContent';
 import { api } from '../utils/axios';
 import withGuard from '../guards/withGuard';
 import { ErrorDto } from '../types/dto';
-import classes from './Create.module.css';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+import classes from './Edit.module.css';
 
-const Create = () => {
+const Edit = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const videoUrlRef = useRef<HTMLInputElement>(null);
+  const { loading, error, content } = useContent(id || '');
+  const { username } = useAuth();
+
   const commentRef = useRef<HTMLInputElement>(null);
   const [rating, setRating] = useState(0);
   const [isSubmitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (content?.rating) setRating(content.rating);
+  }, [content]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
     setSubmitting(true);
 
-    const videoUrl = videoUrlRef.current?.value;
     const comment = commentRef.current?.value;
 
-    if (!videoUrl || !comment) {
-      toast.error('Please complete the form');
+    if (!comment) {
+      toast.error('Comment cannot be blank');
       setSubmitting(false);
       return;
     }
 
     try {
-      await api.post('/content', {
-        videoUrl,
+      await api.patch(`/content/${id}`, {
         comment,
         rating,
       });
-      toast.success('Content created!');
+      toast.success('Content edited!');
       navigate('/');
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -50,17 +59,25 @@ const Create = () => {
     }
   };
 
+  if (loading || !content) return <Loading />;
+  if (error) return <Error />;
+  if (content.postedBy.username !== username)
+    return <Error message="You don't have permission to edit this content" />;
+
+  const { comment } = content;
+
   return (
     <div className={classes.container}>
-      <h1 className={classes.title}>Create new content</h1>
+      <h1 className={classes.title}>Edit content</h1>
       <form className={classes.form} onSubmit={handleSubmit}>
         <div className={classes.formGroup}>
-          <label htmlFor="video-url">Video URL</label>
-          <input type="text" id="video-url" ref={videoUrlRef} />
-        </div>
-        <div className={classes.formGroup}>
           <label htmlFor="comment">Comment (280 characters maximum)</label>
-          <input type="text" id="comment" ref={commentRef} />
+          <input
+            type="text"
+            id="comment"
+            defaultValue={comment}
+            ref={commentRef}
+          />
         </div>
         <div className={classes.formGroup}>
           <div className={classes.ratingContainer}>
@@ -77,7 +94,7 @@ const Create = () => {
         </div>
         <div className={classes.formGroup}>
           <button type="submit" disabled={isSubmitting}>
-            Create
+            Edit
           </button>
         </div>
       </form>
@@ -85,4 +102,4 @@ const Create = () => {
   );
 };
 
-export default withGuard(Create);
+export default withGuard(Edit);
