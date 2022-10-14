@@ -28,6 +28,7 @@ const Register = () => {
 
     if (!username || !name || !password || !passwordConfirm) {
       toast.error('Please complete the form');
+      setSubmitting(false);
       return;
     }
 

@@ -21,6 +21,7 @@ const Login = () => {
 
     if (!username || !password) {
       toast.error('Please enter username and password');
+      setSubmitting(false);
       return;
     }
 
