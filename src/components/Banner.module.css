@@ -17,3 +17,15 @@
   font-weight: normal;
   color: #7f8487;
 }
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 48px 32px;
+  }
+  .title {
+    font-size: 36px;
+  }
+  .subtitle {
+    font-size: 18px;
+  }
+}

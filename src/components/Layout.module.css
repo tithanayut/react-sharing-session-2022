@@ -12,6 +12,7 @@
   gap: 32px;
   font-weight: bold;
   color: #ff731d;
+  font-size: 16px;
 }
 
 .link {
@@ -20,4 +21,14 @@
 
 .activeLink {
   color: #ef5b0c;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 12px 24px;
+  }
+  .nav {
+    gap: 16px;
+    font-size: 14px;
+  }
 }

@@ -64,3 +64,30 @@
 .formGroup button:disabled {
   background-color: #7f8487;
 }
+
+@media (max-width: 768px) {
+  .container {
+    margin: 32px 0;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .subtitle {
+    font-size: 16px;
+  }
+  .form {
+    gap: 8px;
+  }
+  .formGroup {
+    min-width: 90%;
+  }
+  .formGroup label {
+    font-size: 16px;
+  }
+  .formGroup input {
+    font-size: 16px;
+  }
+  .formGroup button {
+    font-size: 16px;
+  }
+}

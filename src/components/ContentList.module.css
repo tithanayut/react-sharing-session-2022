@@ -6,3 +6,9 @@
   gap: 32px;
   margin: 36px 128px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    margin: 22px 32px;
+  }
+}

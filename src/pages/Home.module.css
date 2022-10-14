@@ -18,3 +18,14 @@
 .button:hover {
   background-color: #fa6a10;
 }
+
+@media (max-width: 768px) {
+  .container {
+    margin: 22px 32px;
+  }
+  .button {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+  }
+}
