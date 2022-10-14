@@ -34,6 +34,7 @@ const Register = () => {
 
     if (password !== passwordConfirm) {
       toast.error('Passwords do not match');
+      setSubmitting(false);
       return;
     }
 
