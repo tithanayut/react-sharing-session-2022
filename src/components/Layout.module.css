@@ -17,3 +17,7 @@
 .link {
   cursor: pointer;
 }
+
+.activeLink {
+  color: #ef5b0c;
+}

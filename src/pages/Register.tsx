@@ -1,5 +1,5 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { FormEvent, useRef, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../providers/AuthProvider';
@@ -58,10 +58,7 @@ const Register = () => {
     }
   };
 
-  useEffect(() => {
-    if (isLoggedIn) navigate('/');
-  }, [isLoggedIn]);
-
+  if (isLoggedIn) return <Navigate to="/" />;
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>Register</h1>

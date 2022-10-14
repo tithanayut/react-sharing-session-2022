@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from './Logo';
 import classes from './Layout.module.css';
 import { useAuth } from '../providers/AuthProvider';
@@ -20,8 +20,22 @@ const Layout = (props: LayoutProps) => {
         </Link>
         {!isLoggedIn ? (
           <nav className={classes.nav}>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? classes.activeLink : undefined
+              }
+            >
+              Login
+            </NavLink>
+            <NavLink
+              to="/register"
+              className={({ isActive }) =>
+                isActive ? classes.activeLink : undefined
+              }
+            >
+              Register
+            </NavLink>
           </nav>
         ) : (
           <nav className={classes.nav}>

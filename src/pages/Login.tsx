@@ -1,6 +1,6 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../providers/AuthProvider';
 import classes from './Login.module.css';
 
@@ -40,11 +40,7 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    if (isLoggedIn) navigate('/');
-  }, [isLoggedIn]);
-
-  if (isLoggedIn) return null;
+  if (isLoggedIn) return <Navigate to="/" />;
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>Login</h1>
