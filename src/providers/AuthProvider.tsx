@@ -49,7 +49,7 @@ const AuthProvider = (props: AuthProviderProps) => {
       setUsername(username);
       setLoggedIn(true);
     } catch (err) {
-      if (err instanceof AxiosError) {
+      if (axios.isAxiosError(err)) {
         const { response } = err as AxiosError<ErrorDto>;
         const message = response?.data.message;
         if (message) throw new Error(message);

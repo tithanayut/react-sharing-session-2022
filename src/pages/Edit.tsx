@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import ReactStars from 'react-stars';
 import toast from 'react-hot-toast';
 import { useAuth } from '../providers/AuthProvider';
@@ -47,7 +47,7 @@ const Edit = () => {
       toast.success('Content edited!');
       navigate('/');
     } catch (err) {
-      if (err instanceof AxiosError) {
+      if (axios.isAxiosError(err)) {
         const { response } = err as AxiosError<ErrorDto>;
         const message = response?.data.message;
         toast.error(message || 'Something went wrong');

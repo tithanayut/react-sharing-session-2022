@@ -47,7 +47,7 @@ const Register = () => {
       toast.success('Account created!');
       navigate('/login');
     } catch (err) {
-      if (err instanceof AxiosError) {
+      if (axios.isAxiosError(err)) {
         const { response } = err as AxiosError<ErrorDto>;
         const message = response?.data.message;
         toast.error(message || 'Something went wrong');
